@@ -200,7 +200,7 @@
 			"name": "movements",
 			"item": [
 				{
-					"name": "getAllmovements",
+					"name": "getAllMovements",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -215,6 +215,50 @@
 							"path": [
 								"api",
 								"movements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMovementsByIdAccountCategoryAndOperationType",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://projectbankingenia.herokuapp.com/api/movementsaccount/1?category=UTILITIES&operation=REST",
+							"protocol": "https",
+							"host": [
+								"projectbankingenia",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"movementsaccount",
+								"1"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "UTILITIES"
+								},
+								{
+									"key": "operation",
+									"value": "REST"
+								}
 							]
 						}
 					},
@@ -985,6 +1029,28 @@
 					"response": []
 				},
 				{
+					"name": "getAccountBalanceById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://projectbankingenia.herokuapp.com/api/account-balance/1",
+							"protocol": "https",
+							"host": [
+								"projectbankingenia",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"account-balance",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "creatAccount",
 					"request": {
 						"method": "POST",
@@ -1102,15 +1168,6 @@
 								"accounts"
 							]
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "New Request",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": null
 					},
 					"response": []
 				}

@@ -202,6 +202,28 @@ public class MovementDaoImpl implements MovementDao {
         }
         return new ArrayList<>();
     }
+
+    @Override
+    public List<Movement> findMovementsByCategoryAccountIdAndPaymentType(Long accountId, String categoryType, String paymentType) {
+        if (paymentType != null&&accountId!=null&&categoryType != null) {
+            String sql="SELECT m FROM Movement m JOIN Account a on m.account.id = a.id WHERE a.id ="+accountId;
+            Query query = manager.createQuery(sql);
+            List<Movement> movementList = query.getResultList();
+            List<Movement> movementListF =new ArrayList<>();
+
+            System.out.println("------------------****************************************************************---------------");
+            System.out.println(paymentType.toString().toUpperCase());
+            System.out.println("---------------------------------");
+            for (int i = 0; i < movementList.size(); i++) {
+                if(movementList.get(i).getPaymentType().equals(paymentType) && movementList.get(i).getCategoryType().equals(categoryType)){
+                    movementListF.add(movementList.get(i));
+                }
+            }
+            return movementListF;
+            //return query.getResultList();
+        }
+        return new ArrayList<>();
+    }
 }
 
 
