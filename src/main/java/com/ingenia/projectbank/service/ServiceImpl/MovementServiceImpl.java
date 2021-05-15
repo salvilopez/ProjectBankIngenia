@@ -41,6 +41,7 @@ public class MovementServiceImpl  implements MovementService {
     @Override
     public Movement createMovement(Movement movement) {
         movement.getAccount().addMovimiento(movement);
+        movement.setTimestamp(Instant.now());
         return movementRepository.save(movement);
     }
 
