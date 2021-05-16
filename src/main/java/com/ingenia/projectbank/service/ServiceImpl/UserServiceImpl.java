@@ -85,14 +85,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean existsByEmailAndPassword(String email, String password) {
         if(repository.existsByEmail(email)){
-
-            System.out.println("**********************---------------****************************************");
-            System.out.println(email+" ==> "+password);
-
             User user=repository.findUserByEmail(email);
-
-            System.out.println(passwordEncoder.matches(password,user.getPassword()));
-            System.out.println("**********************---------------****************************************");
             return passwordEncoder.matches(password,user.getPassword());
         }
         return false;

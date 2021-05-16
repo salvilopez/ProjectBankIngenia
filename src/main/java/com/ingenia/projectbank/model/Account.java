@@ -57,13 +57,7 @@ public class Account {
         this.currentCreditCardBalance = currentCreditCardBalance;
     }
 
-    /**
-     public HashMap getHistorialSaldo() {
-     return historialSaldo;
-     }
-     public void setHistorialSaldo(HashMap historialSaldo) {
-     this.historialSaldo = historialSaldo;
-     }*/
+
 
     public Long getId() {
         return id;

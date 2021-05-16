@@ -41,13 +41,12 @@ public class Movement {
     @JoinColumn(name = "id_account")
     @JsonIgnoreProperties("movements")
     private Account account;
-    //TODO---------------------------------------
-    //@Column(name = "remaining-balance")
+
     private double remainingBalance;
+
     private double remainingCreditBalance;
 
 
-    //TODO---------------------------------------
     @ApiModelProperty("Clave tipo categoría tipo Enum")
     @Enumerated(EnumType.STRING)
     private CategoryType categoryType;
