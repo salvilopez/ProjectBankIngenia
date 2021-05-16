@@ -1,6 +1,7 @@
 package com.ingenia.projectbank.service.ServiceImpl;
 
 import com.ingenia.projectbank.dao.MovementDao;
+import com.ingenia.projectbank.error.SaldoInsuficienteException;
 import com.ingenia.projectbank.model.CategoryType;
 import com.ingenia.projectbank.model.Movement;
 import com.ingenia.projectbank.model.OperationType;
@@ -39,7 +40,7 @@ public class MovementServiceImpl  implements MovementService {
     }
 
     @Override
-    public Movement createMovement(Movement movement) {
+    public Movement createMovement(Movement movement) throws SaldoInsuficienteException {
         movement.getAccount().addMovimiento(movement);
         movement.setTimestamp(Instant.now());
         return movementRepository.save(movement);

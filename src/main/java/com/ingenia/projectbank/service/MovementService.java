@@ -1,5 +1,6 @@
 package com.ingenia.projectbank.service;
 
+import com.ingenia.projectbank.error.SaldoInsuficienteException;
 import com.ingenia.projectbank.model.*;
 
 import java.time.Instant;
@@ -15,7 +16,7 @@ public interface MovementService {
 
     Optional<Movement> findOneMovementById(Long id);
 
-    Movement createMovement(Movement movement);
+    Movement createMovement(Movement movement) throws SaldoInsuficienteException;
 
     Movement updateMovement(Movement movement);
 

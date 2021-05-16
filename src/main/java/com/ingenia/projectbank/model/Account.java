@@ -1,6 +1,7 @@
 package com.ingenia.projectbank.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.ingenia.projectbank.error.SaldoInsuficienteException;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
@@ -123,8 +124,16 @@ public class Account {
         this.currentGlobalBalance = currentGlobalBalance;
     }
 
-    public void addMovimiento(Movement movement){
+    public void addMovimiento(Movement movement) throws SaldoInsuficienteException {
+
+
+
+
         if(movement.getOperationType()==OperationType.REST && movement.getPaymentType()== PaymentType.ACCOUNT){
+            if(movement.getQuantity()>movement.getRemainingBalance()){
+                throw new SaldoInsuficienteException("Saldo Insuficiente ");
+
+            }
             this.currentBalance=this.currentBalance-movement.getQuantity();
             movement.setRemainingBalance(this.currentBalance);
             this.getMovements().add(movement);
@@ -144,6 +153,10 @@ public class Account {
             this.getMovements().add(movement);
         }
         if(movement.getOperationType()==OperationType.REST && movement.getPaymentType()== PaymentType.DEBIT){
+            if(movement.getQuantity()>movement.getRemainingBalance()){
+
+
+            }
             this.currentBalance=this.currentBalance-movement.getQuantity();
             movement.setRemainingBalance(this.currentBalance);
             this.getMovements().add(movement);

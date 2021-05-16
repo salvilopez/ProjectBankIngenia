@@ -1,10 +1,12 @@
 package com.ingenia.projectbank.controller;
 
+import com.ingenia.projectbank.error.SaldoInsuficienteException;
 import com.ingenia.projectbank.model.*;
 import com.ingenia.projectbank.service.BankCardService;
 import com.ingenia.projectbank.service.MovementService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.swagger.models.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -115,13 +117,18 @@ public class MovementController {
      */
     @PostMapping("/movement")
     @ApiOperation(value = "crea una movimiento")
-    public ResponseEntity<Movement> createMovement(@ApiParam("Objeto Movement para Crearlo")@RequestBody Movement movement) throws URISyntaxException{
+    public ResponseEntity<Movement> createMovement(@ApiParam("Objeto Movement para Crearlo")@RequestBody Movement movement) throws URISyntaxException {
         log.debug("Create Movement");
         Movement resultado=null;
         if (movement.getId()!=null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        try {
         resultado=movementService.createMovement(movement);
+        } catch (SaldoInsuficienteException e) {
+            log.debug(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         return  ResponseEntity.created(new URI("/api/movement/"+resultado.getId())).body(resultado);
     }
 
