@@ -154,7 +154,7 @@ public class Account {
         }
         if(movement.getOperationType()==OperationType.REST && movement.getPaymentType()== PaymentType.DEBIT){
             if(movement.getQuantity()>movement.getRemainingBalance()){
-
+                throw new SaldoInsuficienteException("Saldo Insuficiente ");
 
             }
             this.currentBalance=this.currentBalance-movement.getQuantity();
