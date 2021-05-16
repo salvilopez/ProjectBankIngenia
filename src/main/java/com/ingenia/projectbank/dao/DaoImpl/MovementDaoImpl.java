@@ -223,6 +223,33 @@ public class MovementDaoImpl implements MovementDao {
         }
         return new ArrayList<>();
     }
+
+    @Override
+    public List<Movement> findMovementsByOperationAndCategoryAccountIdAndDate(Long accountId, OperationType operationType, CategoryType categoryType, LocalDate firstDay, LocalDate lastDay) {
+        if (operationType != null&&accountId!=null&&categoryType!=null&&firstDay != null&&lastDay!=null) {
+            String sql="SELECT m FROM Movement m JOIN Account a on m.account.id = a.id WHERE  a.id ="+accountId+" AND m.date BETWEEN '"+firstDay+"' AND '"+lastDay+"'";
+            Query query = manager.createQuery(sql);
+            List<Movement> movementList = query.getResultList();
+            List<Movement> movementListF =new ArrayList<>();
+            for (int i = 0; i < movementList.size(); i++) {
+                if(movementList.get(i).getOperationType().equals(operationType)){
+                    movementListF.add(movementList.get(i));
+                }
+            }
+
+            List<Movement> resultado =new ArrayList<>();
+            for (int i = 0; i < movementListF.size(); i++) {
+                if(movementListF.get(i).getCategoryType().equals(categoryType)){
+                    resultado.add(movementListF.get(i));
+                }
+            }
+            return resultado;
+
+        }
+        return new ArrayList<>();
+    }
+
+
 }
 
 

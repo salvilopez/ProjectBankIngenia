@@ -70,7 +70,13 @@ public class MovementController {
                                                       @RequestParam(name = "operation", required = false) String operation,
                                                       @RequestParam(name = "category", required = false) String category,
                                                       @RequestParam(name = "payment", required = false) String payment){
-        if(startdate!=null&&finishdate!=null&&payment!=null){
+
+        if(startdate!=null&&finishdate!=null&&operation!=null&&category!=null){
+            log.debug("Rest request Movements for account ID filter by initDate and finisDate  and payment");
+            LocalDate localDateI = LocalDate.parse(startdate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            LocalDate localDateF = LocalDate.parse(finishdate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            return movementService.findMovementsByOperationAndCategoryAccountIdAndDate(accountid,operation, category,localDateI,localDateF);
+        } else if(startdate!=null&&finishdate!=null&&payment!=null){
             log.debug("Rest request Movements for account ID filter by initDate and finisDate  and payment");
          LocalDate localDateI = LocalDate.parse(startdate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             LocalDate localDateF = LocalDate.parse(finishdate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
