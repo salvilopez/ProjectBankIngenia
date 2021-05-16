@@ -130,7 +130,7 @@ public class Account {
 
 
         if(movement.getOperationType()==OperationType.REST && movement.getPaymentType()== PaymentType.ACCOUNT){
-            if(movement.getQuantity()>movement.getRemainingBalance()){
+            if(movement.getQuantity()>this.currentCreditCardBalance){
                 throw new SaldoInsuficienteException("Saldo Insuficiente ");
 
             }
@@ -153,7 +153,7 @@ public class Account {
             this.getMovements().add(movement);
         }
         if(movement.getOperationType()==OperationType.REST && movement.getPaymentType()== PaymentType.DEBIT){
-            if(movement.getQuantity()>movement.getRemainingBalance()){
+            if(movement.getQuantity()>this.currentCreditCardBalance){
                 throw new SaldoInsuficienteException("Saldo Insuficiente ");
 
             }
