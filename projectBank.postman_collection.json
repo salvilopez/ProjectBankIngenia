@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "064be26a-7cfb-44dc-9b8b-9b8c25a38888",
+		"_postman_id": "7dc52bea-0b24-4a22-8566-97e31528e333",
 		"name": "projectBank",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -403,7 +403,34 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": null
+						"url": {
+							"raw": "https://projectbankingenia.herokuapp.com/api/movementsaccount/1?startdate=2021-05-01&finishdate=2021-05-30&payment=ACCOUNT",
+							"protocol": "https",
+							"host": [
+								"projectbankingenia",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"movementsaccount",
+								"1"
+							],
+							"query": [
+								{
+									"key": "startdate",
+									"value": "2021-05-01"
+								},
+								{
+									"key": "finishdate",
+									"value": "2021-05-30"
+								},
+								{
+									"key": "payment",
+									"value": "ACCOUNT"
+								}
+							]
+						}
 					},
 					"response": []
 				},
@@ -517,6 +544,46 @@
 								{
 									"key": "payment",
 									"value": "ACCOUNT"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getmovementsByAccountId[fechaInt][fechafin][category]",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://projectbankingenia.herokuapp.com/api/movementsaccount/1?category=FUEL&operation=REST&startdate=2021-01-01&finishdate=2021-01-20",
+							"protocol": "https",
+							"host": [
+								"projectbankingenia",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"movementsaccount",
+								"1"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "FUEL"
+								},
+								{
+									"key": "operation",
+									"value": "REST"
+								},
+								{
+									"key": "startdate",
+									"value": "2021-01-01"
+								},
+								{
+									"key": "finishdate",
+									"value": "2021-01-20"
 								}
 							]
 						}
@@ -1005,7 +1072,7 @@
 					"response": []
 				},
 				{
-					"name": "getTotalBalanceByBalanceTypeAndUser Copy",
+					"name": "getTotalBalanceByBalanceTypeAndUser",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
