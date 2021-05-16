@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "8132df98-4fd1-4c85-8c7c-7d89bbc91af2",
+		"_postman_id": "064be26a-7cfb-44dc-9b8b-9b8c25a38888",
 		"name": "projectBank",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -395,6 +395,15 @@
 								}
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMovementsByAccountId[fechaInt,fechaFin,payment]",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
 					},
 					"response": []
 				},
