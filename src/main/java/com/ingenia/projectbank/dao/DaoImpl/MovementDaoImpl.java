@@ -191,6 +191,23 @@ public class MovementDaoImpl implements MovementDao {
     }
 
     @Override
+    public List<Movement> findMovementsIntervalAndPaymentByAccountId(Long accountId, LocalDate firstDay, LocalDate lastDay, PaymentType paymentType) {
+        if (firstDay != null&&lastDay!=null&accountId!=null&&paymentType!=null) {
+            String sql="SELECT m FROM Movement m JOIN Account a on m.account.id = a.id WHERE  a.id ="+accountId+" AND m.date BETWEEN '"+firstDay+"' AND '"+lastDay+"'";
+            Query query = manager.createQuery(sql);
+            List<Movement>movements= query.getResultList();
+            List<Movement>movementFinal= new ArrayList<>();
+            for (int i = 0; i < movements.size(); i++) {
+                if(movements.get(i).getPaymentType().equals(paymentType)){
+                    movementFinal.add(movements.get(i));
+                }
+            }
+            return movementFinal;
+        }
+        return new ArrayList<>();
+    }
+
+    @Override
     public List<Movement> findMovementsByCategoryAccountIdAndPaymentType(Long accountId, String categoryType, String paymentType) {
         if (paymentType != null&&accountId!=null&&categoryType != null) {
             String sql="SELECT m FROM Movement m JOIN Account a on m.account.id = a.id WHERE a.id ="+accountId;

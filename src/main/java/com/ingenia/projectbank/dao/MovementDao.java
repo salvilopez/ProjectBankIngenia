@@ -23,6 +23,6 @@ public interface MovementDao {
     List<Movement> findMovementsByOperationAndCategoryAccountId(Long accountId,OperationType operationType,CategoryType categoryType);
     List<Movement> findMovementsByPaymentAccountId(Long accountId,PaymentType paymentType);
     List<Movement> findMovementsAllAccountId(Long accountId);
-
+    List<Movement> findMovementsIntervalAndPaymentByAccountId(Long accountId, LocalDate firstDay, LocalDate lastDay,PaymentType paymentType);
     List<Movement> findMovementsByCategoryAccountIdAndPaymentType(Long accountid, String categoryType, String paymentType);
 }

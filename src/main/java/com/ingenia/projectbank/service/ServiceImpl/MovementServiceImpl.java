@@ -118,6 +118,21 @@ public class MovementServiceImpl  implements MovementService {
     }
 
     @Override
+    public List<Movement> findMovementsIntervalAndPaymentByAccountId(Long accountId, LocalDate firstDay, LocalDate lastDay, String paymentType) {
+        switch(paymentType.toUpperCase()) {
+            case "CREDIT":
+                return movementDao.findMovementsIntervalAndPaymentByAccountId(accountId,firstDay,lastDay,PaymentType.CREDIT);
+            case "DEBIT":
+                return movementDao.findMovementsIntervalAndPaymentByAccountId(accountId,firstDay,lastDay,PaymentType.DEBIT);
+            case "ACCOUNT":
+                return movementDao.findMovementsIntervalAndPaymentByAccountId(accountId,firstDay,lastDay,PaymentType.ACCOUNT);
+            default:
+                return new ArrayList<>();
+        }
+
+    }
+
+    @Override
     public List<Movement> findMovementsByCategoryAccountId(Long accountId, String categoryType) {
         switch(categoryType.toUpperCase()) {
             case "RESTAURANTS":

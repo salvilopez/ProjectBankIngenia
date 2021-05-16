@@ -29,6 +29,7 @@ public interface MovementService {
     List<Movement> findMovementsByPayment(String paymentType);
 
     List<Movement> findMovementsIntervalByAccountId(Long accountId, LocalDate firstDay, LocalDate lastDay);
+    List<Movement> findMovementsIntervalAndPaymentByAccountId(Long accountId, LocalDate firstDay, LocalDate lastDay,String paymentType);
     List<Movement> findMovementsByCategoryAccountId(Long accountId,String categoryType);
     List<Movement> findMovementsByOperationAccountId(Long accountId,String operationType);
     List<Movement> findMovementsByPaymentAccountId(Long accountId,String paymentType);
