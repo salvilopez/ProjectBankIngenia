@@ -33,10 +33,7 @@ public class AccountServiceImpl  implements AccountService {
         return null;
     }
 
-    @Override
-    public List<Account> findAccountsByUserId(Long id) {
-        return accountDao.findAccountsByUserId(id);
-    }
+
 
     @Override
     public Optional<Account> findAccountByIban(String iban) {

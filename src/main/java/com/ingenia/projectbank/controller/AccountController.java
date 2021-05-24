@@ -202,23 +202,5 @@ public class AccountController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    /**
-     * method return account by user
-     *
-     * @param user
-     *
-     * @return
-     */
 
-    @GetMapping("/account-user-id/{id}")
-    @ApiOperation(value = "retorna  una/s Cuenta Bancaria por usuario")
-    public ResponseEntity<List<Account>> getAccountByUserId(@ApiParam("Objeto user a consultar") @PathVariable Long id) {
-        log.debug("Rest request current Account by userid"+id);
-        List<Account> accountsOpt = accountService.findAccountsByUserId(id);
-        if (accountsOpt != null) {
-            return ResponseEntity.ok().body(accountsOpt);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
 }

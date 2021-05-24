@@ -51,18 +51,7 @@ public class AccountDaoImpl implements AccountDao {
         }
     }
 
-    @Override
-    public List<Account> findAccountsByUserId(Long id) {
 
-         User usu = userRepository.findById(id).get();
-         User userOpt = manager.find(User.class,usu.getId());
-
-        if(userOpt != null){
-            return userOpt.getAccounts();
-        }else{
-            return null;
-        }
-    }
 
     @Override
     public Double getAccountBalanceByTypeAndUser(User user, String balanceType) {
