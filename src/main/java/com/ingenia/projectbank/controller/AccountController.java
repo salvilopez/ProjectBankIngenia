@@ -209,7 +209,7 @@ public class AccountController {
      *
      * @return
      */
-    @GetMapping("/account-user-id/id")
+    @GetMapping("/account-user-id/{id}")
     @ApiOperation(value = "retorna  una/s Cuenta Bancaria por usuario")
     public ResponseEntity<List<Account>> getAccountByUserId(@ApiParam("Objeto user a consultar") @PathVariable Long id) {
         log.debug("Rest request current Account by userid"+id);
