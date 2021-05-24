@@ -1,10 +1,7 @@
 package com.ingenia.projectbank.dao.DaoImpl;
 
 import com.ingenia.projectbank.dao.MovementDao;
-import com.ingenia.projectbank.model.CategoryType;
-import com.ingenia.projectbank.model.Movement;
-import com.ingenia.projectbank.model.OperationType;
-import com.ingenia.projectbank.model.PaymentType;
+import com.ingenia.projectbank.model.*;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -21,6 +18,7 @@ import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 @Repository
@@ -249,8 +247,24 @@ public class MovementDaoImpl implements MovementDao {
         return new ArrayList<>();
     }
 
+    @Override
+    public List<Movement> findMovementsByUserId(Long id) {
+            User userOpt = manager.find(User.class, id);
+                    if(userOpt != null){
+                        List<Account> accounts = userOpt.getAccounts();
+                        for(Account account: accounts){
+                            List<Movement> movements = account.getMovements();
+                            return movements;
+                        }
+                    }
+        return null;
 
+    }
 }
+
+
+
+
 
 
 

@@ -302,4 +302,9 @@ public class MovementServiceImpl  implements MovementService {
 
     }
 
+    @Override
+    public List<Movement> findMovementsByUserId(Long id) {
+        return movementDao.findMovementsByUserId(id);
+    }
+
 }

@@ -118,6 +118,21 @@ public class MovementController {
 
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+    /**
+     *method return One Movement for User ID
+     * @param id
+     * @return
+     */
+    @GetMapping("/movement/userId/{id}")
+    @ApiOperation(value = "encuentra un movimiento por id de usuario")
+    public ResponseEntity<List<Movement>> findMovementsByUserId(@ApiParam("Clave primaria del usuario") @PathVariable Long id) {
+        log.debug("Rest request a Movement with user id: "+id);
+        List<Movement>  movementOpt = movementService.findMovementsByUserId(id);
+        if (movementOpt != null)
+            return ResponseEntity.ok().body(movementOpt);
+
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
     /**
      * create movement

@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public interface MovementDao {
     List<Movement> findMovementsInterval(LocalDate firstDay, LocalDate lastDay);
@@ -26,4 +27,6 @@ public interface MovementDao {
     List<Movement> findMovementsIntervalAndPaymentByAccountId(Long accountId, LocalDate firstDay, LocalDate lastDay,PaymentType paymentType);
     List<Movement> findMovementsByCategoryAccountIdAndPaymentType(Long accountid, String categoryType, String paymentType);
     List<Movement> findMovementsByOperationAndCategoryAccountIdAndDate(Long accountId,OperationType operationType,CategoryType categoryType, LocalDate firstDay, LocalDate lastDay);
+
+    List<Movement> findMovementsByUserId(Long id);
 }
