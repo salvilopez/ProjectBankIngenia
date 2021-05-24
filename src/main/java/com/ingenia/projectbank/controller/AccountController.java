@@ -65,7 +65,7 @@ public class AccountController {
 
     @GetMapping("/accountbyiban/{iban}")
     @ApiOperation(value = "encuentra una Cuenta Bancaria por su iban")
-    public ResponseEntity<Account> findOneAccount(@ApiParam("Clave primaria de la Cuenta Bancaria") @PathVariable String iban) {
+    public ResponseEntity<Account> findOneAccountByIban(@ApiParam("Clave primaria de la Cuenta Bancaria") @PathVariable String iban) {
         log.debug("Rest request an Account with iban: " + iban);
         Optional<Account> accountOpt = accountService.findAccountByIban(iban);
         if (accountOpt.isPresent())
