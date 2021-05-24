@@ -4,6 +4,7 @@ import com.ingenia.projectbank.dao.AccountDao;
 import com.ingenia.projectbank.model.Account;
 import com.ingenia.projectbank.model.User;
 import com.ingenia.projectbank.repository.AccountRepository;
+import com.ingenia.projectbank.repository.UserRepository;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,9 @@ public class AccountDaoImpl implements AccountDao {
 
     @Autowired
      AccountRepository repository;
+
+    @Autowired
+    UserRepository userRepository;
 
     @Override
     public Double getCurrentBalanceByAccountId(Long id) {
@@ -49,7 +53,9 @@ public class AccountDaoImpl implements AccountDao {
 
     @Override
     public List<Account> findAccountsByUserId(Long id) {
-        User userOpt = manager.find(User.class,id);
+
+         User usu = userRepository.findById(id).get();
+         User userOpt = manager.find(User.class,usu.getId());
 
         if(userOpt != null){
             return userOpt.getAccounts();
