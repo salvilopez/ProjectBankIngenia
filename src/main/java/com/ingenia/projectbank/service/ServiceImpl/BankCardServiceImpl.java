@@ -58,6 +58,11 @@ public class BankCardServiceImpl implements BankCardService {
     }
 
     @Override
+    public List<BankCard> findBankCardsByUserId(Long id) {
+        return bankCardDao.findBankCardsByUserId(id);
+    }
+
+    @Override
     public List<BankCard> findBankCardsByAccount(Account account) {
         return bankCardDao.findBankCardsByAccount(account);
     }

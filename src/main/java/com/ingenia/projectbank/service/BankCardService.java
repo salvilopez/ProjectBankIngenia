@@ -22,6 +22,6 @@ public interface BankCardService {
     void deleteAllBankCards();
 
     List<BankCard> findBankCardsByUser(User user);
-
+    List<BankCard> findBankCardsByUserId(Long id);
     List<BankCard> findBankCardsByAccount(Account account);
 }

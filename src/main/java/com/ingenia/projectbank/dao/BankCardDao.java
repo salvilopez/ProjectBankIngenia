@@ -10,4 +10,5 @@ public interface BankCardDao {
     List<BankCard> findBankCardsByUser(User user);
 
     List<BankCard> findBankCardsByAccount(Account account);
+    List<BankCard> findBankCardsByUserId(Long id);
 }

@@ -4,6 +4,8 @@ import com.ingenia.projectbank.dao.BankCardDao;
 import com.ingenia.projectbank.model.Account;
 import com.ingenia.projectbank.model.BankCard;
 import com.ingenia.projectbank.model.User;
+import com.ingenia.projectbank.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -14,6 +16,9 @@ import java.util.List;
 public class BankCardDaoImpl implements BankCardDao {
     @PersistenceContext
     private EntityManager manager;
+
+    @Autowired
+    UserRepository userRepository;
 
     @Override
     public List<BankCard> findBankCardsByUser(User user) {
@@ -38,5 +43,18 @@ public class BankCardDaoImpl implements BankCardDao {
         }
         return null;
     }
+
+    @Override
+    public List<BankCard> findBankCardsByUserId(Long id) {
+        User userOpt = manager.find(User.class,id);
+        if(userOpt != null){
+            List<Account> accounts = userOpt.getAccounts();
+            for(Account account: accounts){
+                return account.getCards();
+            }
+        }
+        return null;
+    }
+
 }
 
