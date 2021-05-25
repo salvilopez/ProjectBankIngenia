@@ -319,6 +319,62 @@ public class MovementServiceImpl  implements MovementService {
         }
     }
 
+    @Override
+    public List<Movement> findMovementsByUserIdDateAndOperation(Long id, LocalDate startdate, LocalDate finishdate, String operation, String categoryType) {
+        switch(categoryType.toUpperCase()) {
+            case "RESTAURANTS":
+                switch(operation.toUpperCase()) {
+                    case "SUM":
+                        return movementDao.findMovementsByUserIdDateAndOperation(id,startdate,finishdate,OperationType.SUM,CategoryType.RESTAURANTS);
+                    case "REST":
+                        return movementDao.findMovementsByUserIdDateAndOperation(id,startdate,finishdate,OperationType.REST,CategoryType.RESTAURANTS);
+                    default:
+                        return new ArrayList<>();
+                }
+            case "FUEL":
+
+                switch(operation.toUpperCase()) {
+                    case "SUM":
+                        return movementDao.findMovementsByUserIdDateAndOperation(id,startdate,finishdate,OperationType.SUM,CategoryType.FUEL);
+                    case "REST":
+                        return movementDao.findMovementsByUserIdDateAndOperation(id,startdate,finishdate,OperationType.REST,CategoryType.FUEL);
+                    default:
+                        return new ArrayList<>();
+                }
+
+            case "CLOTHES":
+                switch(operation.toUpperCase()) {
+                    case "SUM":
+                        return movementDao.findMovementsByUserIdDateAndOperation(id,startdate,finishdate,OperationType.SUM,CategoryType.CLOTHES);
+                    case "REST":
+                        return movementDao.findMovementsByUserIdDateAndOperation(id,startdate,finishdate,OperationType.REST,CategoryType.CLOTHES);
+                    default:
+                        return new ArrayList<>();
+                }
+
+            case "UTILITIES":
+                switch(operation.toUpperCase()) {
+                    case "SUM":
+                        return movementDao.findMovementsByUserIdDateAndOperation(id,startdate,finishdate,OperationType.SUM,CategoryType.UTILITIES);
+                    case "REST":
+                        return movementDao.findMovementsByUserIdDateAndOperation(id,startdate,finishdate,OperationType.REST,CategoryType.UTILITIES);
+                    default:
+                        return new ArrayList<>();
+                }
+            case "PAID":
+                switch(operation.toUpperCase()) {
+                    case "SUM":
+                        return movementDao.findMovementsByUserIdDateAndOperation(id,startdate,finishdate,OperationType.SUM,CategoryType.PAID);
+                    case "REST":
+                        return movementDao.findMovementsByUserIdDateAndOperation(id,startdate,finishdate,OperationType.REST,CategoryType.PAID);
+                    default:
+                        return new ArrayList<>();
+                }
+
+            default:
+                return new ArrayList<>();
+        }
+    }
 
 
 }

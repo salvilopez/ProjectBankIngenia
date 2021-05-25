@@ -141,7 +141,7 @@ public class MovementController {
     @GetMapping("/movements-user-date-operation/userId/{id}")
     @ApiOperation(value = "encuentra un movimiento por id de usuario, operation and Date")
     public ResponseEntity<List<Movement>> findMovementsByUserIdDateAndOperation(@ApiParam("Clave primaria del usuario")
-                                                                                    @PathVariable Long id,
+                                                                                @PathVariable Long id,
                                                                                 @RequestParam(name = "startdate",required = false) String startdate,
                                                                                 @RequestParam(name = "finishdate", required = false) String finishdate,
                                                                                 @RequestParam(name = "operation", required = false) String operation) {
@@ -154,7 +154,23 @@ public class MovementController {
 
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+    @GetMapping("/movements-user-date-operation-category/userId/{id}")
+    @ApiOperation(value = "encuentra un movimiento por id de usuario, operation and Date")
+    public ResponseEntity<List<Movement>> findMovementsByUserIdDateAndOperationAndcategory(@ApiParam("Clave primaria del usuario")
+                                                                                @PathVariable Long id,
+                                                                                @RequestParam(name = "startdate",required = false) String startdate,
+                                                                                @RequestParam(name = "finishdate", required = false) String finishdate,
+                                                                                @RequestParam(name = "operation", required = false) String operation,
+                                                                                @RequestParam(name = "category", required = false) String category) {
+        log.debug("Rest request a Movement with user id: "+id);
+        LocalDate localDateI = LocalDate.parse(startdate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDate localDateF = LocalDate.parse(finishdate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        List<Movement>  movementOpt = movementService.findMovementsByUserIdDateAndOperation(id, localDateI,localDateF,operation,category);
+        if (movementOpt != null)
+            return ResponseEntity.ok().body(movementOpt);
 
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
     /**
      * create movement
      * @param movement

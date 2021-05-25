@@ -39,4 +39,5 @@ public interface MovementService {
     List<Movement>  findMovementsByUserId(Long id);
 
     List<Movement> findMovementsByUserIdDateAndOperation(Long id, LocalDate startdate, LocalDate finishdate, String operation);
+    List<Movement> findMovementsByUserIdDateAndOperation(Long id, LocalDate startdate, LocalDate finishdate, String operation, String categoryType);
 }

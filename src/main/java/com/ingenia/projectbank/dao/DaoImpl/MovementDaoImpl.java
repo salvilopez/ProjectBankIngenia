@@ -277,7 +277,9 @@ public class MovementDaoImpl implements MovementDao {
                 Query query = manager.createQuery(sql);
                 List<Movement> movements=query.getResultList();
                 for (int j = 0; j < movements.size(); j++) {
-                    allMovementsList.add(movements.get(j));
+                    if(movements.get(j).getOperationType().equals(operation)) {
+                        allMovementsList.add(movements.get(j));
+                    }
 
                 }
 
@@ -287,9 +289,32 @@ public class MovementDaoImpl implements MovementDao {
         return new ArrayList<>();
     }
 
+    @Override
+    public List<Movement> findMovementsByUserIdDateAndOperation(Long id, LocalDate startdate, LocalDate finishdate, OperationType operation, CategoryType categoryType) {
+        if (id != null&&startdate!=null&&finishdate!=null&&operation != null&&categoryType != null) {
+
+            List<Movement> allMovementsList = new ArrayList<>();
+            User user = userRepository.findById(id).get();
+            for (int i = 0; i < user.getAccounts().size(); i++) {
+                String sql = "SELECT m FROM Movement m JOIN User a on m.account.id = a.id WHERE  a.id =" + user.getAccounts().get(i).getId() + " AND m.date BETWEEN '" + startdate + "' AND '" + finishdate + "'";
+                Query query = manager.createQuery(sql);
+                List<Movement> movements=query.getResultList();
+                for (int j = 0; j < movements.size(); j++) {
+                    if(movements.get(j).getOperationType().equals(operation)&&movements.get(j).getCategoryType().equals(categoryType)) {
+                        allMovementsList.add(movements.get(j));
+                    }
+
+                }
+
+            }
+            return allMovementsList;
+        }
+        return new ArrayList<>();
+    }
+    }
 
 
-}
+
 
 
 
