@@ -260,7 +260,36 @@ public class MovementDaoImpl implements MovementDao {
         return null;
 
     }
+
+    @Override
+    public List<Movement> findMovementsByUserIdDateAndOperation(Long id, String startdate, String finishdate, String operation) {
+        User userOpt = manager.find(User.class, id);
+
+        LocalDate start = LocalDate.parse(startdate);
+
+        LocalDate finish = LocalDate.parse(finishdate);
+
+
+        if(userOpt != null){
+            List<Account> accounts = userOpt.getAccounts();
+            List<Movement> movementListF =new ArrayList<>();
+
+            for(Account account: accounts){
+                List<Movement> movements = account.getMovements();
+
+                for(Movement movement : movements) {
+
+                    if(movement.getDate().isAfter(start) && movement.getDate().isBefore(finish) && movement.getOperationType().equals(operation) ) {
+                        movementListF.add(movement);
+                    }
+                }
+                return movementListF;
+            }
+        }
+        return null;
+    }
 }
+
 
 
 

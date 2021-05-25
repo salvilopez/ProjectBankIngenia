@@ -119,7 +119,7 @@ public class MovementController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     /**
-     *method return One Movement for User ID
+     *method return  Movements for User ID
      * @param id
      * @return
      */
@@ -128,6 +128,22 @@ public class MovementController {
     public ResponseEntity<List<Movement>> findMovementsByUserId(@ApiParam("Clave primaria del usuario") @PathVariable Long id) {
         log.debug("Rest request a Movement with user id: "+id);
         List<Movement>  movementOpt = movementService.findMovementsByUserId(id);
+        if (movementOpt != null)
+            return ResponseEntity.ok().body(movementOpt);
+
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    /**
+     *method return movements for User ID, date and paymentType
+     * @param id
+     * @return
+     */
+    @GetMapping("/movements-user-date-operation/userId/{id}")
+    @ApiOperation(value = "encuentra un movimiento por id de usuario, operation and Date")
+    public ResponseEntity<List<Movement>> findMovementsByUserIdDateAndOperation(@ApiParam("Clave primaria del usuario") @PathVariable Long id,@RequestParam(name = "startdate", required = false) String startdate,
+                                                                                @RequestParam(name = "finishdate", required = false) String finishdate,@RequestParam(name = "operation", required = false) String operation) {
+        log.debug("Rest request a Movement with user id: "+id);
+        List<Movement>  movementOpt = movementService.findMovementsByUserIdDateAndOperation(id, startdate,finishdate,operation);
         if (movementOpt != null)
             return ResponseEntity.ok().body(movementOpt);
 

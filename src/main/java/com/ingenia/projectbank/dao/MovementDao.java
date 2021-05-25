@@ -29,4 +29,5 @@ public interface MovementDao {
     List<Movement> findMovementsByOperationAndCategoryAccountIdAndDate(Long accountId,OperationType operationType,CategoryType categoryType, LocalDate firstDay, LocalDate lastDay);
 
     List<Movement> findMovementsByUserId(Long id);
+    List<Movement> findMovementsByUserIdDateAndOperation(Long id, String startdate, String finishdate, String operation);
 }

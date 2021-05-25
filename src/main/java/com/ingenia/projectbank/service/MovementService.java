@@ -38,4 +38,6 @@ public interface MovementService {
     List<Movement> findMovementsByOperationAndCategoryAccountIdAndDate(Long accountId,String operationType,String categoryType, LocalDate firstDay, LocalDate lastDay);
 
     List<Movement>  findMovementsByUserId(Long id);
+
+    List<Movement> findMovementsByUserIdDateAndOperation(Long id, String startdate, String finishdate, String operation);
 }

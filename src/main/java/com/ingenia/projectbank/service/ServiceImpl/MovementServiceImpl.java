@@ -307,4 +307,9 @@ public class MovementServiceImpl  implements MovementService {
         return movementDao.findMovementsByUserId(id);
     }
 
+    @Override
+    public List<Movement> findMovementsByUserIdDateAndOperation(Long id, String startdate, String finishdate, String operation) {
+        return movementDao.findMovementsByUserIdDateAndOperation( id,  startdate,  finishdate,  operation);
+    }
+
 }
