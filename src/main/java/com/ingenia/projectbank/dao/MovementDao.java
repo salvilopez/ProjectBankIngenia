@@ -25,9 +25,8 @@ public interface MovementDao {
     List<Movement> findMovementsByPaymentAccountId(Long accountId,PaymentType paymentType);
     List<Movement> findMovementsAllAccountId(Long accountId);
     List<Movement> findMovementsIntervalAndPaymentByAccountId(Long accountId, LocalDate firstDay, LocalDate lastDay,PaymentType paymentType);
-    List<Movement> findMovementsByCategoryAccountIdAndPaymentType(Long accountid, String categoryType, String paymentType);
     List<Movement> findMovementsByOperationAndCategoryAccountIdAndDate(Long accountId,OperationType operationType,CategoryType categoryType, LocalDate firstDay, LocalDate lastDay);
-
+    List<Movement> findMovementsByCategoryAccountIdAndPaymentType(Long accountId, String categoryType, String paymentType);
     List<Movement> findMovementsByUserId(Long id);
-    List<Movement> findMovementsByUserIdDateAndOperation(Long id, String startdate, String finishdate, String operation);
+    List<Movement> findMovementsByUserIdDateAndOperation(Long id, LocalDate startdate, LocalDate finishdate, OperationType operation);
 }

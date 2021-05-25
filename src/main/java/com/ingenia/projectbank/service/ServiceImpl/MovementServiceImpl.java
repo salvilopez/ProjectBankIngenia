@@ -308,8 +308,17 @@ public class MovementServiceImpl  implements MovementService {
     }
 
     @Override
-    public List<Movement> findMovementsByUserIdDateAndOperation(Long id, String startdate, String finishdate, String operation) {
-        return movementDao.findMovementsByUserIdDateAndOperation( id,  startdate,  finishdate,  operation);
+    public List<Movement> findMovementsByUserIdDateAndOperation(Long id, LocalDate startdate, LocalDate finishdate, String operation) {
+        switch(operation.toUpperCase()) {
+            case "SUM":
+                return movementDao.findMovementsByUserIdDateAndOperation(id,startdate,finishdate,OperationType.SUM);
+            case "REST":
+                return movementDao.findMovementsByUserIdDateAndOperation(id,startdate,finishdate,OperationType.REST);
+            default:
+                return new ArrayList<>();
+        }
     }
+
+
 
 }

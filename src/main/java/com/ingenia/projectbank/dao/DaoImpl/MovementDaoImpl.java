@@ -2,6 +2,8 @@ package com.ingenia.projectbank.dao.DaoImpl;
 
 import com.ingenia.projectbank.dao.MovementDao;
 import com.ingenia.projectbank.model.*;
+import com.ingenia.projectbank.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -26,6 +28,9 @@ public class MovementDaoImpl implements MovementDao {
 
     @PersistenceContext
     private EntityManager manager;
+
+    @Autowired
+    UserRepository userRepository;
 
     @Override
     public List<Movement> findMovementsInterval(LocalDate firstDay, LocalDate lastDay) {
@@ -262,32 +267,28 @@ public class MovementDaoImpl implements MovementDao {
     }
 
     @Override
-    public List<Movement> findMovementsByUserIdDateAndOperation(Long id, String startdate, String finishdate, String operation) {
-        User userOpt = manager.find(User.class, id);
+    public List<Movement> findMovementsByUserIdDateAndOperation(Long id, LocalDate startdate, LocalDate finishdate, OperationType operation) {
+        if (id != null&&startdate!=null&&finishdate!=null&&operation != null) {
 
-        LocalDate start = LocalDate.parse(startdate);
+            List<Movement> allMovementsList = new ArrayList<>();
+                 User user = userRepository.findById(id).get();
+            for (int i = 0; i < user.getAccounts().size(); i++) {
+                String sql = "SELECT m FROM Movement m JOIN User a on m.account.id = a.id WHERE  a.id =" + user.getAccounts().get(i).getId() + " AND m.date BETWEEN '" + startdate + "' AND '" + finishdate + "'";
+                Query query = manager.createQuery(sql);
+                List<Movement> movements=query.getResultList();
+                for (int j = 0; j < movements.size(); j++) {
+                    allMovementsList.add(movements.get(j));
 
-        LocalDate finish = LocalDate.parse(finishdate);
-
-
-        if(userOpt != null){
-            List<Account> accounts = userOpt.getAccounts();
-            List<Movement> movementListF =new ArrayList<>();
-
-            for(Account account: accounts){
-                List<Movement> movements = account.getMovements();
-
-                for(Movement movement : movements) {
-
-                    if(movement.getDate().isAfter(start) && movement.getDate().isBefore(finish) && movement.getOperationType().equals(operation) ) {
-                        movementListF.add(movement);
-                    }
                 }
-                return movementListF;
+
             }
+            return allMovementsList;
         }
-        return null;
+        return new ArrayList<>();
     }
+
+
+
 }
 
 
