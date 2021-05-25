@@ -74,22 +74,6 @@ public class BankCardController {
         }
     }
     /**
-     *method return all bankcards By User
-     * @param user
-     * @return
-     */
-    @PostMapping("/bankcard-user")
-    @ApiOperation(value = "encuentrar tarjetas bancarias por usuario")
-    public ResponseEntity <List<BankCard>> findBankCardsByU(@ApiParam("Objeto User a consultar")@RequestBody User user) {
-        log.debug("Rest request  Bank Cards of user: "+ user);
-        List<BankCard> bankCardsOpt = bankCardService.findBankCardsByUser(user);
-        if (bankCardsOpt != null) {
-            return ResponseEntity.ok().body(bankCardsOpt);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-    /**
      *method return all bankcards By Account
      * @param account
      * @return
