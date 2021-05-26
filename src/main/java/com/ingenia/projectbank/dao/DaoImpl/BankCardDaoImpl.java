@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -47,12 +48,21 @@ public class BankCardDaoImpl implements BankCardDao {
     @Override
     public List<BankCard> findBankCardsByUserId(Long id) {
         User userOpt = manager.find(User.class,id);
+        List<BankCard> bankCards= new ArrayList<>();
         if(userOpt != null){
-            List<Account> accounts = userOpt.getAccounts();
-            for(Account account: accounts){
-                return account.getCards();
+            for (int i = 0; i < userOpt.getAccounts().size(); i++) {
+
+
+                for (int j = 0; j < userOpt.getAccounts().get(i).getCards().size(); j++) {
+                    bankCards.add(userOpt.getAccounts().get(i).getCards().get(j));
+                }
+
             }
+return bankCards;
         }
+
+
+
         return null;
     }
 
