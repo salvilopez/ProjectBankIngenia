@@ -32,13 +32,27 @@ public class BankCard {
     @JoinColumn(name = "id_account")
     private Account account;
 
+
+    @ApiModelProperty("Clave tipo de TARJETA tipo Enum")
+    @Enumerated(EnumType.STRING)
+    private CardType bankCardType;
+
     public BankCard() {
     }
 
-    public BankCard(String pan, String ccv, Instant expirationDate) {
+    public BankCard(String pan, String ccv, Instant expirationDate,CardType bankCardType) {
         this.pan = pan;
         this.ccv = ccv;
         this.expirationDate = expirationDate;
+        this.bankCardType= bankCardType;
+    }
+
+    public CardType getBankCardType() {
+        return bankCardType;
+    }
+
+    public void setBankCardType(CardType bankCardType) {
+        this.bankCardType = bankCardType;
     }
 
     public Long getId() {

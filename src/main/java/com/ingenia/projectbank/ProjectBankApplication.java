@@ -68,8 +68,10 @@ public class ProjectBankApplication implements CommandLineRunner {
 		User salvi = new User("salvi", "Lopez", "salvilopezpruebas@gmail.com",encoder.encode("salvi"));
 
 
-		BankCard bankCard1 = new BankCard("392489234898492", "221", Instant.now());
-		BankCard bankCard2 = new BankCard("1239123939q9q39", "114", Instant.now());
+		BankCard bankCard1 = new BankCard("456435453435435", "221", Instant.now(),CardType.VISA);
+		BankCard bankCard2 = new BankCard("392489234898492", "221", Instant.now(),CardType.MASTERCARD);
+		BankCard bankCard3 = new BankCard("657454854254554", "221", Instant.now(),CardType.VISA);
+		BankCard bankCard4 = new BankCard("354654846545468", "114",Instant.now(),CardType.MASTERCARD);
 
 
 		account1.addMovimiento(movement1);
@@ -116,10 +118,15 @@ public class ProjectBankApplication implements CommandLineRunner {
 		account2.getUsers().add(user2);
 
 		account1.getCards().add(bankCard1);
+		account1.getCards().add(bankCard3);
+		account1.getCards().add(bankCard4);
 		account2.getCards().add(bankCard2);
 
 		bankCard1.setAccount(account1);
+		bankCard3.setAccount(account1);
+		bankCard4.setAccount(account1);
 		bankCard2.setAccount(account2);
+
 		account2.addMovimiento(movement8);
 		movement8.setAccount(account2);
 		account2.addMovimiento(movement9);
@@ -134,7 +141,8 @@ public class ProjectBankApplication implements CommandLineRunner {
 		userService.createUser(user2);
 		bankCardService.createBankCard(bankCard1);
 		bankCardService.createBankCard(bankCard2);
-
+		bankCardService.createBankCard(bankCard3);
+		bankCardService.createBankCard(bankCard4);
 
 
 
