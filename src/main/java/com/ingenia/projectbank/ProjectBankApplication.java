@@ -44,8 +44,10 @@ public class ProjectBankApplication implements CommandLineRunner {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 
-		Account account1 = new Account("es2452645435454",3000.0, 600.00);
-		Account account2 = new Account("es2452645435455",4000.0, 700.00);
+		Account account1 = new Account("es2452645435454",3000.0, 800.00);
+		Account account3 = new Account("es4155445545454",2000.0, 900.00);
+		Account account4 = new Account("es1212122323131",5000.0, 600.00);
+		Account account2 = new Account("es8787878787878",1000.0, 700.00);
 
 		Movement movement1=new Movement(OperationType.REST, PaymentType.ACCOUNT, Instant.now(),LocalDate.now(),320.0,account1, CategoryType.UTILITIES);
 		Movement movement2=new Movement(OperationType.REST, PaymentType.CREDIT,Instant.parse("2021-01-01T18:35:24.00Z"),LocalDate.parse("2021-01-01"),100.0,account1, CategoryType.CLOTHES);
@@ -112,19 +114,23 @@ public class ProjectBankApplication implements CommandLineRunner {
 
 
 		user1.getAccounts().add(account1);
+		user1.getAccounts().add(account3);
+		user1.getAccounts().add(account4);
 		user2.getAccounts().add(account2);
 
 		account1.getUsers().add(user1);
+		account3.getUsers().add(user1);
+		account4.getUsers().add(user1);
 		account2.getUsers().add(user2);
 
 		account1.getCards().add(bankCard1);
-		account1.getCards().add(bankCard3);
-		account1.getCards().add(bankCard4);
+		account3.getCards().add(bankCard3);
+		account4.getCards().add(bankCard4);
 		account2.getCards().add(bankCard2);
 
 		bankCard1.setAccount(account1);
-		bankCard3.setAccount(account1);
-		bankCard4.setAccount(account1);
+		bankCard3.setAccount(account3);
+		bankCard4.setAccount(account4);
 		bankCard2.setAccount(account2);
 
 		account2.addMovimiento(movement8);
@@ -133,6 +139,9 @@ public class ProjectBankApplication implements CommandLineRunner {
 		movement9.setAccount(account2);
 
 		accountService.createAccount(account1);
+		accountService.createAccount(account3);
+		accountService.createAccount(account4);
+
 		accountService.createAccount(account2);
 
 
