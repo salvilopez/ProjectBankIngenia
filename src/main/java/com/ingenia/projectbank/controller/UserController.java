@@ -65,10 +65,11 @@ public class UserController {
     @ApiOperation(value = "encuentra un usuario por su email")
     public ResponseEntity<User> findOneUserByEmail(@ApiParam("Clave email del usuario") @PathVariable String email) {
         log.debug("Rest request a account with email: "+email);
-        User userOpt = userService.findUserByEmail(email);
-        if (userOpt != null)
-            return ResponseEntity.ok().body(userOpt);
-
+        if(email!=null){
+            User userOpt = userService.findUserByEmail(email);
+            if (userOpt != null)
+                return ResponseEntity.ok().body(userOpt);
+        }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     /**

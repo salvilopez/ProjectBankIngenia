@@ -91,6 +91,7 @@ public class AccountController {
         }
         resultado = accountService.createAccount(account);
         if(resultado==null)return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
         return ResponseEntity.created(new URI("/api/account/" + resultado.getId())).body(resultado);
     }
 
