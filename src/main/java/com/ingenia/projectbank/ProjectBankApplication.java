@@ -65,7 +65,7 @@ public class ProjectBankApplication implements CommandLineRunner {
 		Movement movement16=new Movement(OperationType.SUM, PaymentType.DEBIT,Instant.parse("2021-04-15T18:35:24.00Z"),LocalDate.parse("2021-04-15"),200.0,account2, CategoryType.PAID);
 
 
-		User user1 = new User("Borja", "Díaz", "borja@diaz",encoder.encode("1234"));
+		User user1 = new User("Borja", "Díaz", "pruebas@pruebas",encoder.encode("pruebas"));
 		User user2 = new User("Elena", "Fernández", "elena@fernandez",encoder.encode("1234"));
 		User salvi = new User("salvi", "Lopez", "salvilopezpruebas@gmail.com",encoder.encode("salvi"));
 
