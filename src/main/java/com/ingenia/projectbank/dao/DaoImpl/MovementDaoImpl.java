@@ -254,14 +254,16 @@ public class MovementDaoImpl implements MovementDao {
 
     @Override
     public List<Movement> findMovementsByUserId(Long id) {
+        if(id!=null) {
             User userOpt = manager.find(User.class, id);
-                    if(userOpt != null){
-                        List<Account> accounts = userOpt.getAccounts();
-                        for(Account account: accounts){
-                            List<Movement> movements = account.getMovements();
-                            return movements;
-                        }
-                    }
+            if (userOpt != null) {
+                List<Account> accounts = userOpt.getAccounts();
+                for (Account account : accounts) {
+                    List<Movement> movements = account.getMovements();
+                    return movements;
+                }
+            }
+        }
         return null;
 
     }

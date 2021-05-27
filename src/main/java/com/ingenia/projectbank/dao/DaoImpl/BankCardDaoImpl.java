@@ -47,21 +47,23 @@ public class BankCardDaoImpl implements BankCardDao {
 
     @Override
     public List<BankCard> findBankCardsByUserId(Long id) {
-        User userOpt = manager.find(User.class,id);
-        List<BankCard> bankCards= new ArrayList<>();
-        if(userOpt != null){
-            for (int i = 0; i < userOpt.getAccounts().size(); i++) {
+
+        if(id!=null) {
+            User userOpt = manager.find(User.class, id);
+            List<BankCard> bankCards = new ArrayList<>();
+            if (userOpt != null) {
+                for (int i = 0; i < userOpt.getAccounts().size(); i++) {
 
 
-                for (int j = 0; j < userOpt.getAccounts().get(i).getCards().size(); j++) {
-                    bankCards.add(userOpt.getAccounts().get(i).getCards().get(j));
+                    for (int j = 0; j < userOpt.getAccounts().get(i).getCards().size(); j++) {
+                        bankCards.add(userOpt.getAccounts().get(i).getCards().get(j));
+                    }
+
                 }
-
+                return bankCards;
             }
-return bankCards;
+
         }
-
-
 
         return null;
     }
