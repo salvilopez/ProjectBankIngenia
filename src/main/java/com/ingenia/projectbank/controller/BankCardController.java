@@ -155,7 +155,10 @@ public class BankCardController {
     @ApiOperation(value = "Borra una  tarjeta bancaria por id")
     public ResponseEntity<Void> deleteOne(@ApiParam("Clave primaria de la bankCard")@PathVariable("id") Long id) {
         log.debug("Delete bankCard");
-        bankCardService.deleteOneBankCardById(id);
+        if(id!=null){
+            bankCardService.deleteOneBankCardById(id);
+        }
+
         return ResponseEntity.noContent().build();
     }
     /**
