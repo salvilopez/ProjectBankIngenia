@@ -111,10 +111,12 @@ public class MovementController {
     @GetMapping("/movement/{id}")
     @ApiOperation(value = "encuentra un movimiento por su id")
     public ResponseEntity<Movement> findOneMovement(@ApiParam("Clave primaria del Movimiento") @PathVariable Long id) {
-        log.debug("Rest request a Movement with id: "+id);
-        Optional<Movement> movementOpt = movementService.findOneMovementById(id);
-        if (movementOpt.isPresent())
-            return ResponseEntity.ok().body(movementOpt.get());
+        if(id!=null){
+            log.debug("Rest request a Movement with id: "+id);
+            Optional<Movement> movementOpt = movementService.findOneMovementById(id);
+            if (movementOpt.isPresent())
+                return ResponseEntity.ok().body(movementOpt.get());
+        }
 
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
