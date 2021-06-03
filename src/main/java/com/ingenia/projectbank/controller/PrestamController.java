@@ -49,7 +49,7 @@ public class PrestamController {
      */
     @GetMapping("/prestam/{id}")
     @ApiOperation(value = "encuentra un Prestamo por su id")
-    public ResponseEntity<Prestam> findOneBankCard(@ApiParam("Clave primaria de Prestamo") @PathVariable Long id) {
+    public ResponseEntity<Prestam> findOnePrestamd(@ApiParam("Clave primaria de Prestamo") @PathVariable Long id) {
         log.debug("Rest request a Prestam with id: "+id);
         Optional<Prestam> restamOpt=prestamService.findOnePrestamById(id);
         if (restamOpt.isPresent())
