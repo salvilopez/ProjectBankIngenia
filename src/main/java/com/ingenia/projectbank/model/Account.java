@@ -48,6 +48,12 @@ public class Account {
     private List<BankCard> cards = new ArrayList<>();
 
 
+    @ApiModelProperty("Prestams ")
+    @OneToMany(mappedBy = "account",orphanRemoval = true, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("account")
+    private List<Prestam> prestams = new ArrayList<>();
+
+
 
     public Account() {
     }
@@ -57,7 +63,6 @@ public class Account {
         this.currentBalance = currentBalance;
         this.currentCreditCardBalance = currentCreditCardBalance;
     }
-
 
 
     public Long getId() {
@@ -84,6 +89,22 @@ public class Account {
         this.currentBalance = currentBalance;
     }
 
+    public Double getCurrentCreditCardBalance() {
+        return currentCreditCardBalance;
+    }
+
+    public void setCurrentCreditCardBalance(Double currentCreditCardBalance) {
+        this.currentCreditCardBalance = currentCreditCardBalance;
+    }
+
+    public Double getCurrentGlobalBalance() {
+        return currentGlobalBalance;
+    }
+
+    public void setCurrentGlobalBalance(Double currentGlobalBalance) {
+        this.currentGlobalBalance = currentGlobalBalance;
+    }
+
     public List<User> getUsers() {
         return users;
     }
@@ -108,20 +129,12 @@ public class Account {
         this.cards = cards;
     }
 
-    public Double getCurrentCreditCardBalance() {
-        return currentCreditCardBalance;
+    public List<Prestam> getPrestams() {
+        return prestams;
     }
 
-    public void setCurrentCreditCardBalance(Double currentCreditCardBalance) {
-        this.currentCreditCardBalance = currentCreditCardBalance;
-    }
-
-    public Double getCurrentGlobalBalance() {
-        return this.currentGlobalBalance =  this.currentBalance + this.currentCreditCardBalance;
-    }
-
-    public void setCurrentGlobalBalance(Double currentGlobalBalance) {
-        this.currentGlobalBalance = currentGlobalBalance;
+    public void setPrestams(List<Prestam> prestams) {
+        this.prestams = prestams;
     }
 
     public void addMovimiento(Movement movement) throws SaldoInsuficienteException {
