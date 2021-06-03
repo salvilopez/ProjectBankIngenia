@@ -9,6 +9,7 @@ import com.ingenia.projectbank.model.PaymentType;
 import com.ingenia.projectbank.repository.AccountRepository;
 import com.ingenia.projectbank.repository.MovementRepository;
 import com.ingenia.projectbank.service.MovementService;
+import jdk.vm.ci.meta.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,8 +42,9 @@ public class MovementServiceImpl  implements MovementService {
 
     @Override
     public Movement createMovement(Movement movement) throws SaldoInsuficienteException {
-        movement.getAccount().addMovimiento(movement);
         movement.setTimestamp(Instant.now());
+        movement.setDate(LocalDate.now());
+        movement.getAccount().addMovimiento(movement);
         return movementRepository.save(movement);
     }
 
