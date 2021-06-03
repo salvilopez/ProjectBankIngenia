@@ -33,7 +33,7 @@ public class Account {
 
     @ApiModelProperty("Clave usuario tipo User")
     @ManyToMany(mappedBy="accounts", cascade = {CascadeType.PERSIST,CascadeType.REFRESH})
-    @JsonIgnoreProperties("account")
+    @JsonIgnoreProperties("accounts")
     private List<User> users = new ArrayList<>();
 
 
@@ -47,12 +47,16 @@ public class Account {
     @JsonIgnoreProperties("account")
     private List<BankCard> cards = new ArrayList<>();
 
-    @OneToOne(mappedBy = "paymentAccount", cascade = CascadeType.ALL)
-    private Prestam prestamPayment;
 
-    @OneToOne(mappedBy = "incomeAccount", cascade = CascadeType.ALL)
-    private Prestam prestamIncome;
 
+    @OneToMany(mappedBy = "accountPayment", orphanRemoval = true, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("accountPayment")
+    private List<Prestam> prestamsPayments = new ArrayList<>();
+
+
+    @OneToMany(mappedBy = "accountIncome", orphanRemoval = true, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("accountIncome")
+    private List<Prestam> prestamsIncomes = new ArrayList<>();
 
     public Account() {
     }
@@ -64,12 +68,20 @@ public class Account {
     }
 
 
-    public void setPrestamIncome(Prestam prestamIncome) {
-        this.prestamIncome = prestamIncome;
+    public List<Prestam> getPrestamsPayments() {
+        return prestamsPayments;
     }
 
-    public Prestam getPrestamIncome() {
-        return prestamIncome;
+    public void setPrestamsPayments(List<Prestam> prestamsPayments) {
+        this.prestamsPayments = prestamsPayments;
+    }
+
+    public List<Prestam> getPrestamsIncomes() {
+        return prestamsIncomes;
+    }
+
+    public void setPrestamsIncomes(List<Prestam> prestamsIncomes) {
+        this.prestamsIncomes = prestamsIncomes;
     }
 
     public Long getId() {
@@ -96,22 +108,6 @@ public class Account {
         this.currentBalance = currentBalance;
     }
 
-    public Double getCurrentCreditCardBalance() {
-        return currentCreditCardBalance;
-    }
-
-    public void setCurrentCreditCardBalance(Double currentCreditCardBalance) {
-        this.currentCreditCardBalance = currentCreditCardBalance;
-    }
-
-    public Double getCurrentGlobalBalance() {
-        return currentGlobalBalance;
-    }
-
-    public void setCurrentGlobalBalance(Double currentGlobalBalance) {
-        this.currentGlobalBalance = currentGlobalBalance;
-    }
-
     public List<User> getUsers() {
         return users;
     }
@@ -136,13 +132,20 @@ public class Account {
         this.cards = cards;
     }
 
-
-    public Prestam getPrestamPayment() {
-        return prestamPayment;
+    public Double getCurrentCreditCardBalance() {
+        return currentCreditCardBalance;
     }
 
-    public void setPrestamPayment(Prestam prestamPayment) {
-        this.prestamPayment = prestamPayment;
+    public void setCurrentCreditCardBalance(Double currentCreditCardBalance) {
+        this.currentCreditCardBalance = currentCreditCardBalance;
+    }
+
+    public Double getCurrentGlobalBalance() {
+        return this.currentGlobalBalance =  this.currentBalance + this.currentCreditCardBalance;
+    }
+
+    public void setCurrentGlobalBalance(Double currentGlobalBalance) {
+        this.currentGlobalBalance = currentGlobalBalance;
     }
 
     public void addMovimiento(Movement movement) throws SaldoInsuficienteException {

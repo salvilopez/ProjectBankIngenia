@@ -2,7 +2,6 @@ package com.ingenia.projectbank.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModelProperty;
-
 import javax.persistence.*;
 
 @Entity
@@ -24,42 +23,35 @@ public class Prestam {
 
     @Column(name = "cantidad")
     @ApiModelProperty("Clave primaria tipo Long")
-    private Integer cantidad;
+    private Double cantidad;
 
 
     @ApiModelProperty("meses de duracion")
-    @Column(name = "duration_months")
+    @Column(name = "durationMonths")
     private Integer durationMonths;
 
-    @OneToOne
-    @JoinColumn(name = "FK_PAYMENT_ACCOUNT", updatable = false, nullable = false)
-    private Account paymentAccount;
-    @OneToOne
-    @JoinColumn(name = "FK_INCOME_ACCOUNT", updatable = false, nullable = false)
-    private Account incomeAccount;
 
-    public Prestam(InterestType interestType, Integer cantidad, Integer durationMonths, Account paymentAccount, Account incomeAccount) {
+
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "id_accountPayment")
+    @JsonIgnoreProperties("prestamsPayments")
+    private Account accountPayment;
+
+
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "id_accountIncome")
+    @JsonIgnoreProperties("prestamsIncomes")
+    private Account accountIncome;
+
+    public Prestam(InterestType interestType, Double cantidad, Integer durationMonths, Account accountPayment, Account accountIncome) {
         this.interestType = interestType;
         this.cantidad = cantidad;
         this.durationMonths = durationMonths;
-        this.paymentAccount = paymentAccount;
-        this.incomeAccount = incomeAccount;
+        this.accountPayment = accountPayment;
+        this.accountIncome = accountIncome;
     }
 
-    public Account getPaymentAccount() {
-        return paymentAccount;
-    }
-
-    public void setPaymentAccount(Account paymentAccount) {
-        this.paymentAccount = paymentAccount;
-    }
-
-    public Account getIncomeAccount() {
-        return incomeAccount;
-    }
-
-    public void setIncomeAccount(Account incomeAccount) {
-        this.incomeAccount = incomeAccount;
+    public Prestam() {
     }
 
     public Long getId() {
@@ -78,13 +70,7 @@ public class Prestam {
         this.interestType = interestType;
     }
 
-    public Integer getCantidad() {
-        return cantidad;
-    }
 
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
-    }
 
     public Integer getDurationMonths() {
         return durationMonths;
@@ -94,5 +80,19 @@ public class Prestam {
         this.durationMonths = durationMonths;
     }
 
+    public Account getAccountPayment() {
+        return accountPayment;
+    }
 
+    public void setAccountPayment(Account accountPayment) {
+        this.accountPayment = accountPayment;
+    }
+
+    public Account getAccountIncome() {
+        return accountIncome;
+    }
+
+    public void setAccountIncome(Account accountIncome) {
+        this.accountIncome = accountIncome;
+    }
 }
