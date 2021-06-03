@@ -52,9 +52,10 @@ public class PrestamController {
     public ResponseEntity<Prestam> findOnePrestamd(@ApiParam("Clave primaria de Prestamo") @PathVariable Long id) {
         log.debug("Rest request a Prestam with id: "+id);
         Optional<Prestam> restamOpt=prestamService.findOnePrestamById(id);
-
+        if (restamOpt.isPresent()) {
             return ResponseEntity.ok().body(restamOpt.get());
-
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 

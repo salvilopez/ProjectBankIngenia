@@ -28,10 +28,8 @@ public class PrestamServiceImpl implements PrestamService {
 
     @Override
     public Optional<Prestam> findOnePrestamById(Long id) {
-        if(id!=null) {
-              Optional.of(repository.findById(id));
-        }
-        return Optional.empty();
+        if(id!=null) return repository.findById(id);
+        return null;
     }
 
     @Override
