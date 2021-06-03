@@ -71,6 +71,13 @@ public class Prestam {
     }
 
 
+    public Double getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Double cantidad) {
+        this.cantidad = cantidad;
+    }
 
     public Integer getDurationMonths() {
         return durationMonths;
