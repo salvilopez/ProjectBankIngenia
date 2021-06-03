@@ -30,9 +30,8 @@ public class PrestamDaoImpl implements PrestamDao {
             List<Prestam>prestams=new ArrayList<>();
             if (user != null) {
                 for (int i = 0; i <user.getAccounts().size() ; i++) {
-                    for (int j = 0; j < user.getAccounts().get(i).getPrestams().size(); j++) {
-                        prestams.add(user.getAccounts().get(i).getPrestams().get(j));
-                    }
+                            prestams.add(user.getAccounts().get(i).getPrestamIncome());
+
                 }
                 return prestams;
             }

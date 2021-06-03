@@ -47,12 +47,11 @@ public class Account {
     @JsonIgnoreProperties("account")
     private List<BankCard> cards = new ArrayList<>();
 
+    @OneToOne(mappedBy = "paymentAccount", cascade = CascadeType.ALL)
+    private Prestam prestamPayment;
 
-    @ApiModelProperty("Prestams ")
-    @OneToMany(mappedBy = "account",orphanRemoval = true, cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("account")
-    private List<Prestam> prestams = new ArrayList<>();
-
+    @OneToOne(mappedBy = "incomeAccount", cascade = CascadeType.ALL)
+    private Prestam prestamIncome;
 
 
     public Account() {
@@ -64,6 +63,14 @@ public class Account {
         this.currentCreditCardBalance = currentCreditCardBalance;
     }
 
+
+    public void setPrestamIncome(Prestam prestamIncome) {
+        this.prestamIncome = prestamIncome;
+    }
+
+    public Prestam getPrestamIncome() {
+        return prestamIncome;
+    }
 
     public Long getId() {
         return id;
@@ -129,12 +136,13 @@ public class Account {
         this.cards = cards;
     }
 
-    public List<Prestam> getPrestams() {
-        return prestams;
+
+    public Prestam getPrestamPayment() {
+        return prestamPayment;
     }
 
-    public void setPrestams(List<Prestam> prestams) {
-        this.prestams = prestams;
+    public void setPrestamPayment(Prestam prestamPayment) {
+        this.prestamPayment = prestamPayment;
     }
 
     public void addMovimiento(Movement movement) throws SaldoInsuficienteException {

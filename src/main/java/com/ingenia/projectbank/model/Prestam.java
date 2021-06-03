@@ -31,23 +31,35 @@ public class Prestam {
     @Column(name = "duration_months")
     private Integer durationMonths;
 
+    @OneToOne
+    @JoinColumn(name = "FK_PAYMENT_ACCOUNT", updatable = false, nullable = false)
+    private Account paymentAccount;
+    @OneToOne
+    @JoinColumn(name = "FK_INCOME_ACCOUNT", updatable = false, nullable = false)
+    private Account incomeAccount;
 
-    @ManyToOne()
-    @ApiModelProperty("Clave cuenta tipo Account")
-    @JoinColumn(name = "id_account")
-    @JsonIgnoreProperties("prestams")
-    private Account account;
-
-
-    public Prestam(InterestType interestType, Integer cantidad, Integer durationMonths, Account account) {
+    public Prestam(InterestType interestType, Integer cantidad, Integer durationMonths, Account paymentAccount, Account incomeAccount) {
         this.interestType = interestType;
         this.cantidad = cantidad;
         this.durationMonths = durationMonths;
-        this.account = account;
+        this.paymentAccount = paymentAccount;
+        this.incomeAccount = incomeAccount;
     }
 
-    public Prestam() {
+    public Account getPaymentAccount() {
+        return paymentAccount;
+    }
 
+    public void setPaymentAccount(Account paymentAccount) {
+        this.paymentAccount = paymentAccount;
+    }
+
+    public Account getIncomeAccount() {
+        return incomeAccount;
+    }
+
+    public void setIncomeAccount(Account incomeAccount) {
+        this.incomeAccount = incomeAccount;
     }
 
     public Long getId() {
@@ -82,11 +94,5 @@ public class Prestam {
         this.durationMonths = durationMonths;
     }
 
-    public Account getAccount() {
-        return account;
-    }
 
-    public void setAccount(Account account) {
-        this.account = account;
-    }
 }

@@ -79,17 +79,25 @@ public class ProjectBankApplication implements CommandLineRunner {
 		BankCard bankCard4 = new BankCard("354654846545468", "114",Instant.now(),CardType.MASTERCARD);
 
 
-		Prestam prestam1 = new Prestam(InterestType.FIJO,600,6,account1);
-		Prestam prestam2 = new Prestam(InterestType.FIJO,1200,12,account1);
-		Prestam prestam3 = new Prestam(InterestType.FIJO,300,24,account1);
-		Prestam prestam4 = new Prestam(InterestType.FIJO,700,12,account2);
+		Prestam prestam1 = new Prestam(InterestType.FIJO,600,6,account1,account3);
+	Prestam prestam2 = new Prestam(InterestType.FIJO,1200,12,account1,account3);
+		Prestam prestam3 = new Prestam(InterestType.FIJO,300,24,account1,account3);
+		Prestam prestam4 = new Prestam(InterestType.FIJO,700,12,account2,account2);
 
 
 
-		account1.getPrestams().add(prestam1);
-		account1.getPrestams().add(prestam2);
-		account1.getPrestams().add(prestam3);
-		account2.getPrestams().add(prestam4);
+		account1.setPrestamPayment(prestam1);
+		account3.setPrestamIncome(prestam1);
+
+		account1.setPrestamPayment(prestam2);
+		account3.setPrestamIncome(prestam2);
+
+		account1.setPrestamPayment(prestam3);
+		account3.setPrestamIncome(prestam3);
+
+		account1.setPrestamPayment(prestam4);
+		account3.setPrestamIncome(prestam4);
+
 		account1.addMovimiento(movement1);
 		account1.addMovimiento(movement2);
 		account1.addMovimiento(movement3);
@@ -166,13 +174,6 @@ public class ProjectBankApplication implements CommandLineRunner {
 		bankCardService.createBankCard(bankCard2);
 		bankCardService.createBankCard(bankCard3);
 		bankCardService.createBankCard(bankCard4);
-
-
-
-
-
-
-
 
 
 
