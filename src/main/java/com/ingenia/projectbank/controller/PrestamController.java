@@ -51,9 +51,9 @@ public class PrestamController {
     @ApiOperation(value = "encuentra un Prestamo por su id")
     public ResponseEntity<Prestam> findOnePrestamd(@ApiParam("Clave primaria de Prestamo") @PathVariable Long id) {
         log.debug("Rest request a Prestam with id: "+id);
-        Optional<Prestam> restamOpt=prestamService.findOnePrestamById(id);
-        if (restamOpt.isPresent()) {
-            return ResponseEntity.ok().body(restamOpt.get());
+        Optional<Prestam> prestamOpt = prestamService.findOnePrestamById(id);
+        if (prestamOpt.isPresent()) {
+            return ResponseEntity.ok().body(prestamOpt.get());
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
