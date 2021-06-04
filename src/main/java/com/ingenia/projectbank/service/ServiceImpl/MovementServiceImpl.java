@@ -9,7 +9,6 @@ import com.ingenia.projectbank.model.PaymentType;
 import com.ingenia.projectbank.repository.AccountRepository;
 import com.ingenia.projectbank.repository.MovementRepository;
 import com.ingenia.projectbank.service.MovementService;
-import jdk.vm.ci.meta.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
