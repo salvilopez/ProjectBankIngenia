@@ -71,7 +71,6 @@ public class PrestamServiceImpl implements PrestamService {
         if(iban!=null&&cantidad!=null){
             Account account=accountService.findAccountByIban(iban).get();
             if (account != null) {
-
                 Movement movement = new Movement(OperationType.REST, PaymentType.ACCOUNT, Instant.now(),LocalDate.now(),cantidad,account,CategoryType.PAID);
                         account.addMovimiento(movement);
                         accountService.updateAccount(account);
