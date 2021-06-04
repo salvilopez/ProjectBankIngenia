@@ -57,7 +57,15 @@ public class PrestamController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
+    @GetMapping("/coolect-loan")
+    @ApiOperation(value = "cobra un Prestamo por su id")
+    public ResponseEntity<Boolean> findOnePrestamd(@RequestParam(name = "iban", required = false) String iban,
+                                                   @RequestParam(name = "cantidad", required = false) Double cantidad) {
+        if (prestamService.colletPrestam(iban,cantidad)) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
 
     /**
@@ -95,6 +103,7 @@ public class PrestamController {
         resultado=prestamService.createPrestam(prestam);
         return  ResponseEntity.created(new URI("/api/prestam/"+resultado.getId())).body(resultado);
     }
+
 
     /**
      * Modificar BankCard

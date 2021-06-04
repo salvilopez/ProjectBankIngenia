@@ -17,4 +17,6 @@ public interface PrestamService {
     void deleteOnePrestamById(Long id);
     void deleteAllPrestams();
     List<Prestam> findPrestamsByUserId(Long id);
+
+    Boolean colletPrestam(String iban,Double cantidad);
 }

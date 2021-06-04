@@ -2,9 +2,11 @@ package com.ingenia.projectbank.service.ServiceImpl;
 
 import com.ingenia.projectbank.dao.BankCardDao;
 import com.ingenia.projectbank.dao.PrestamDao;
+import com.ingenia.projectbank.model.Account;
 import com.ingenia.projectbank.model.Prestam;
 import com.ingenia.projectbank.repository.BankCardRepository;
 import com.ingenia.projectbank.repository.PrestamRepository;
+import com.ingenia.projectbank.service.AccountService;
 import com.ingenia.projectbank.service.PrestamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,9 @@ public class PrestamServiceImpl implements PrestamService {
 
     @Autowired
     PrestamDao prestamDao;
+
+    @Autowired
+    AccountService accountService;
 
 
     @Override
@@ -57,5 +62,19 @@ public class PrestamServiceImpl implements PrestamService {
     @Override
     public List<Prestam> findPrestamsByUserId(Long id) {
         return prestamDao.findPrestamsByUserId(id);
+    }
+
+    @Override
+    public Boolean colletPrestam(String iban, Double cantidad) {
+        if(iban!=null&&cantidad!=null){
+            Account account=accountService.findAccountByIban(iban).get();
+            if (account != null) {
+                Double cant=account.getCurrentBalance()-cantidad;
+                        account.setCurrentBalance(cant);
+                        accountService.updateAccount(account);
+                        return true;
+            }
+        }
+        return false;
     }
 }
