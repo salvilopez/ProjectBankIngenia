@@ -42,9 +42,8 @@ public class MovementServiceImpl  implements MovementService {
 
     @Override
     public Movement createMovement(Movement movement) throws SaldoInsuficienteException {
-        movement.setTimestamp(Instant.now());
-        movement.setDate(LocalDate.now());
         movement.getAccount().addMovimiento(movement);
+        movement.setTimestamp(Instant.now());
         return movementRepository.save(movement);
     }
 
