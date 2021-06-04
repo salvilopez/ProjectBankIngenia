@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "https://bank-ingenia-front.vercel.app", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+//@CrossOrigin(origins = "https://bank-ingenia-front.vercel.app", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class UserController {
     private final Logger log = LoggerFactory.getLogger(UserController.class);
     @Autowired
