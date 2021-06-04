@@ -43,6 +43,7 @@ public class Prestam {
     @JsonIgnoreProperties("prestamsIncomes")
     private Account accountIncome;
 
+
     public Prestam(InterestType interestType, Double cantidad, Integer durationMonths, Account accountPayment, Account accountIncome) {
         this.interestType = interestType;
         this.cantidad = cantidad;
