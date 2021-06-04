@@ -1,5 +1,6 @@
 package com.ingenia.projectbank.controller;
 
+import com.ingenia.projectbank.error.SaldoInsuficienteException;
 import com.ingenia.projectbank.model.Account;
 import com.ingenia.projectbank.model.BankCard;
 import com.ingenia.projectbank.model.Prestam;
@@ -60,7 +61,7 @@ public class PrestamController {
     @GetMapping("/collect-loan")
     @ApiOperation(value = "cobra un Prestamo por su id")
     public ResponseEntity<Boolean> findOnePrestamd(@RequestParam(name = "iban", required = false) String iban,
-                                                   @RequestParam(name = "cantidad", required = false) Double cantidad) {
+                                                   @RequestParam(name = "cantidad", required = false) Double cantidad) throws SaldoInsuficienteException {
         if (prestamService.colletPrestam(iban,cantidad)) {
             return new ResponseEntity<>(HttpStatus.OK);
         }
