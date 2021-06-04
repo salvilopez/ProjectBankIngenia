@@ -115,8 +115,6 @@ public class ProjectBankApplication implements CommandLineRunner {
 
 
 
-
-
 		movement1.setAccount(account1);
 		movement2.setAccount(account1);
 		movement3.setAccount(account1);
