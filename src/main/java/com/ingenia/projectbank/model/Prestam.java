@@ -1,5 +1,6 @@
 package com.ingenia.projectbank.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModelProperty;
 import javax.persistence.*;
@@ -34,13 +35,13 @@ public class Prestam {
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "id_accountPayment")
-    @JsonIgnoreProperties("prestamsPayments")
+    @JsonIgnore
     private Account accountPayment;
 
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "id_accountIncome")
-    @JsonIgnoreProperties("prestamsIncomes")
+    @JsonIgnore
     private Account accountIncome;
 
     public Prestam(InterestType interestType, Double cantidad, Integer durationMonths, Account accountPayment, Account accountIncome) {
