@@ -1,5 +1,6 @@
 package com.ingenia.projectbank.service;
 
+import com.ingenia.projectbank.error.SaldoInsuficienteException;
 import com.ingenia.projectbank.model.Account;
 import com.ingenia.projectbank.model.BankCard;
 import com.ingenia.projectbank.model.Prestam;
@@ -18,5 +19,5 @@ public interface PrestamService {
     void deleteAllPrestams();
     List<Prestam> findPrestamsByUserId(Long id);
 
-    Boolean colletPrestam(String iban,Double cantidad);
+    Boolean colletPrestam(String iban,Double cantidad) throws SaldoInsuficienteException;
 }
