@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface MovementDao {
+
     List<Movement> findMovementsInterval(LocalDate firstDay, LocalDate lastDay);
     List<Movement> findMovementsByCategory(CategoryType categoryType);
     List<Movement> findMovementsByOperation(OperationType operationType);
