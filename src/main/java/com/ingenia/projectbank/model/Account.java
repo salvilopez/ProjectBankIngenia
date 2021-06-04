@@ -50,12 +50,12 @@ public class Account {
 
 
     @OneToMany(mappedBy = "accountPayment", orphanRemoval = true, cascade = CascadeType.ALL)
-    //@JsonIgnoreProperties("accountPayment")
+    @JsonIgnoreProperties("account")
     private List<Prestam> prestamsPayments = new ArrayList<>();
 
 
     @OneToMany(mappedBy = "accountIncome", orphanRemoval = true, cascade = CascadeType.ALL)
-    //@JsonIgnoreProperties("accountIncome")
+    @JsonIgnoreProperties("account")
     private List<Prestam> prestamsIncomes = new ArrayList<>();
 
     public Account() {
