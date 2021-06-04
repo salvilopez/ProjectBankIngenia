@@ -57,7 +57,7 @@ public class PrestamController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    @GetMapping("/coolect-loan")
+    @GetMapping("/collect-loan")
     @ApiOperation(value = "cobra un Prestamo por su id")
     public ResponseEntity<Boolean> findOnePrestamd(@RequestParam(name = "iban", required = false) String iban,
                                                    @RequestParam(name = "cantidad", required = false) Double cantidad) {
