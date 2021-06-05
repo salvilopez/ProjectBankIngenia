@@ -1,5 +1,6 @@
 package com.ingenia.projectbank.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
@@ -30,6 +31,7 @@ public class BankCard {
     @ApiModelProperty("Clave cuenta tipo Cuenta")
     @ManyToOne(optional = true)
     @JoinColumn(name = "id_account")
+    @JsonIgnoreProperties("cards")
     private Account account;
 
 
