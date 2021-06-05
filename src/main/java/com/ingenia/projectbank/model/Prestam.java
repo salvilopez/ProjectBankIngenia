@@ -34,13 +34,13 @@ public class Prestam {
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "id_accountPayment")
-    @JsonIgnoreProperties("prestamsPayments")
+    @JsonIgnoreProperties("prestams_payments")
     private Account accountPayment;
 
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "id_accountIncome")
-    @JsonIgnoreProperties("prestamsIncomes")
+    @JsonIgnoreProperties("prestams_incomes")
     private Account accountIncome;
 
     public Prestam(InterestType interestType, Double cantidad, Integer durationMonths, Account accountPayment, Account accountIncome) {

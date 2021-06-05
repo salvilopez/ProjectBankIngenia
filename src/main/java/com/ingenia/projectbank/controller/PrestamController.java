@@ -97,7 +97,10 @@ public class PrestamController {
     @ApiOperation(value = "crea una Prestam")
     public ResponseEntity<Prestam> createPrestam(@ApiParam("Objeto Prestam para Crearlo")@RequestBody Prestam prestam) throws URISyntaxException{
         log.debug("Create Prestam");
+
+        System.out.println(prestam);
         Prestam resultado=null;
+
         if (prestam.getId()!=null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
