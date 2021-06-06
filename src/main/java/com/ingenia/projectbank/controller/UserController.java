@@ -39,7 +39,6 @@ public class UserController {
         log.debug("Rest request all users");
         return userService.findAllUsers();
     }
-
     /**
      * method return One account for ID
      *
