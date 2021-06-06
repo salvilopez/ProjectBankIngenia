@@ -32,7 +32,6 @@ public class MovementController {
     public MovementController(MovementService movementService) {
         this.movementService = movementService;
     }
-
     /**
      * method return all BankCards
      * @return List<Movements>
