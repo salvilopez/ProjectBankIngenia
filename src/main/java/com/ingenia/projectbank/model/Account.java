@@ -1,5 +1,6 @@
 package com.ingenia.projectbank.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ingenia.projectbank.error.SaldoInsuficienteException;
 import io.swagger.annotations.ApiModelProperty;
@@ -50,12 +51,12 @@ public class Account {
 
 
     @OneToMany(mappedBy = "accountPayment", orphanRemoval = true, cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("accountPayment")
+    @JsonIgnore
     private List<Prestam> prestamsPayments = new ArrayList<>();
 
 
     @OneToMany(mappedBy = "accountIncome", orphanRemoval = true, cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("accountIncome")
+    @JsonIgnore
     private List<Prestam> prestamsIncomes = new ArrayList<>();
 
     public Account() {

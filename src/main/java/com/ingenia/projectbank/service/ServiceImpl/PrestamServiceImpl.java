@@ -73,6 +73,7 @@ public class PrestamServiceImpl implements PrestamService {
             if (account != null) {
                 Movement movement = new Movement(OperationType.REST, PaymentType.ACCOUNT, Instant.now(),LocalDate.now(),cantidad,account,CategoryType.PAID);
                         account.addMovimiento(movement);
+                // account.setCurrentBalance(account.getCurrentGlobalBalance()-cantidad);
                         accountService.updateAccount(account);
                         return true;
             }
